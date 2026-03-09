@@ -1,0 +1,57 @@
+{
+  "restaurantId": "gelato-pizza",
+  "categories": [
+    {
+      "name": "Pizza klasická (32 cm)",
+      "items": [
+        { "name": "Margherita", "description": "Rajčatový základ, mozzarella, bazalka", "price": 145, "available": true },
+        { "name": "Prosciutto", "description": "Rajčata, mozzarella, šunka", "price": 165, "available": true },
+        { "name": "Funghi", "description": "Rajčata, mozzarella, žampiony", "price": 155, "available": true },
+        { "name": "Salame", "description": "Rajčata, mozzarella, salám", "price": 165, "available": true },
+        { "name": "Hawaii", "description": "Rajčata, mozzarella, šunka, ananas", "price": 170, "available": true },
+        { "name": "Quattro Formaggi", "description": "Čtyři druhy sýra", "price": 180, "available": true },
+        { "name": "Tonno", "description": "Rajčata, mozzarella, tuňák, cibule", "price": 175, "available": true },
+        { "name": "Diavola", "description": "Rajčata, mozzarella, pikantní salám, chilli", "price": 170, "available": true },
+        { "name": "Capricciosa", "description": "Rajčata, mozzarella, šunka, žampiony, olivy", "price": 175, "available": true },
+        { "name": "Stella Speciál", "description": "Rajčata, mozzarella, kuřecí, slanina, cibule, BBQ", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Pizza velká (45 cm)",
+      "items": [
+        { "name": "Margherita", "description": "Rajčatový základ, mozzarella, bazalka", "price": 225, "available": true },
+        { "name": "Prosciutto", "description": "Rajčata, mozzarella, šunka", "price": 245, "available": true },
+        { "name": "Funghi", "description": "Rajčata, mozzarella, žampiony", "price": 235, "available": true },
+        { "name": "Salame", "description": "Rajčata, mozzarella, salám", "price": 245, "available": true },
+        { "name": "Hawaii", "description": "Rajčata, mozzarella, šunka, ananas", "price": 250, "available": true },
+        { "name": "Quattro Formaggi", "description": "Čtyři druhy sýra", "price": 265, "available": true },
+        { "name": "Tonno", "description": "Rajčata, mozzarella, tuňák, cibule", "price": 255, "available": true },
+        { "name": "Diavola", "description": "Rajčata, mozzarella, pikantní salám, chilli", "price": 250, "available": true },
+        { "name": "Capricciosa", "description": "Rajčata, mozzarella, šunka, žampiony, olivy", "price": 260, "available": true },
+        { "name": "Stella Speciál", "description": "Rajčata, mozzarella, kuřecí, slanina, cibule, BBQ", "price": 285, "available": true }
+      ]
+    },
+    {
+      "name": "Těstoviny",
+      "items": [
+        { "name": "Spaghetti Bolognese", "description": "Masová omáčka, parmazán", "price": 155, "available": true },
+        { "name": "Penne Arrabiata", "description": "Pikantní rajčatová omáčka", "price": 145, "available": true },
+        { "name": "Spaghetti Carbonara", "description": "Slanina, smetana, parmazán", "price": 165, "available": true }
+      ]
+    },
+    {
+      "name": "Saláty",
+      "items": [
+        { "name": "Salát Caprese", "description": "Mozzarella, rajčata, bazalka, balzamik", "price": 135, "available": true },
+        { "name": "Caesar salát", "description": "Kuřecí, parmazán, krutony, caesar dresink", "price": 155, "available": true }
+      ]
+    },
+    {
+      "name": "Dezerty",
+      "items": [
+        { "name": "Tiramisu", "description": "Domácí tiramisu", "price": 85, "available": true },
+        { "name": "Panna Cotta", "description": "S lesním ovocem", "price": 75, "available": true }
+      ]
+    }
+  ]
+}

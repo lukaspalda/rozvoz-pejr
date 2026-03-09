@@ -1,0 +1,45 @@
+{
+  "restaurantId": "gabl",
+  "categories": [
+    {
+      "name": "Polévky",
+      "items": [
+        { "name": "Denní polévka", "description": "Dle aktuální nabídky", "price": 45, "available": true }
+      ]
+    },
+    {
+      "name": "Hlavní jídla",
+      "items": [
+        { "name": "Burger Classic", "description": "Hovězí maso, cheddar, rajče, salát, BBQ omáčka, hranolky", "price": 195, "available": true },
+        { "name": "Chicken Burger", "description": "Kuřecí prsa, coleslaw, majonéza, hranolky", "price": 185, "available": true },
+        { "name": "Smažený sýr", "description": "Eidam v trojobalu, hranolky, tatarka", "price": 155, "available": true },
+        { "name": "Kuřecí řízek", "description": "Kuřecí prsa v trojobalu, bramborový salát", "price": 175, "available": true },
+        { "name": "Gábl Bowl", "description": "Rýže, kuřecí, avokádo, edamame, dresink", "price": 185, "available": true },
+        { "name": "Fish & Chips", "description": "Smažená treska, hranolky, tatarka", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Saláty",
+      "items": [
+        { "name": "Caesar salát", "description": "Kuřecí, parmazán, krutony, caesar dresink", "price": 165, "available": true },
+        { "name": "Řecký salát", "description": "Feta, olivy, rajčata, okurka, papriky", "price": 155, "available": true }
+      ]
+    },
+    {
+      "name": "Přílohy",
+      "items": [
+        { "name": "Hranolky", "description": "Porce hranolek", "price": 65, "available": true },
+        { "name": "Batátové hranolky", "description": "Porce batátových hranolek", "price": 85, "available": true },
+        { "name": "Coleslaw", "description": "Domácí coleslaw salát", "price": 45, "available": true }
+      ]
+    },
+    {
+      "name": "Nápoje",
+      "items": [
+        { "name": "Domácí limonáda", "description": "Citron / pomeranč / malina", "price": 65, "available": true },
+        { "name": "Coca-Cola 0,33l", "description": "", "price": 45, "available": true },
+        { "name": "Sprite 0,33l", "description": "", "price": 45, "available": true }
+      ]
+    }
+  ]
+}

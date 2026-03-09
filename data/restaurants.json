@@ -1,0 +1,74 @@
+[
+  {
+    "id": "gabl",
+    "name": "Gábl bistro",
+    "slug": "gabl-bistro",
+    "description": "Moderní bistro s denním menu a domácí kuchyní",
+    "image": "gabl.jpg",
+    "tags": ["bistro", "denní menu", "česká"],
+    "active": true,
+    "minOrder": 150,
+    "deliveryFee": 49,
+    "sortOrder": 1
+  },
+  {
+    "id": "king-kebab",
+    "name": "King Kebab",
+    "slug": "king-kebab",
+    "description": "Kebaby, tortilly, boxy a talíře s čerstvým masem",
+    "image": "king-kebab.jpg",
+    "tags": ["kebab", "fast food", "turecká"],
+    "active": true,
+    "minOrder": 130,
+    "deliveryFee": 49,
+    "sortOrder": 2
+  },
+  {
+    "id": "gelato-pizza",
+    "name": "Gelato Pizza Stella",
+    "slug": "gelato-pizza-stella",
+    "description": "Italská pizza pečená v kamenné peci",
+    "image": "gelato-pizza.jpg",
+    "tags": ["pizza", "italská", "gelato"],
+    "active": true,
+    "minOrder": 150,
+    "deliveryFee": 49,
+    "sortOrder": 3
+  },
+  {
+    "id": "indicka",
+    "name": "Indická restaurace",
+    "slug": "indicka",
+    "description": "Autentická indická kuchyně s curry a tandoori specialitami",
+    "image": "indicka.jpg",
+    "tags": ["indická", "curry", "tandoori"],
+    "active": true,
+    "minOrder": 200,
+    "deliveryFee": 49,
+    "sortOrder": 4
+  },
+  {
+    "id": "tres-amigos",
+    "name": "Tres Amigos",
+    "slug": "tres-amigos",
+    "description": "Mexická kuchyně — burritos, tacos a nachos",
+    "image": "tres-amigos.jpg",
+    "tags": ["mexická", "burrito", "tacos"],
+    "active": true,
+    "minOrder": 150,
+    "deliveryFee": 49,
+    "sortOrder": 5
+  },
+  {
+    "id": "hodovna",
+    "name": "Hodovna",
+    "slug": "hodovna",
+    "description": "Tradiční česká kuchyně a grilované speciality",
+    "image": "hodovna.jpg",
+    "tags": ["česká", "gril", "klasika"],
+    "active": true,
+    "minOrder": 150,
+    "deliveryFee": 49,
+    "sortOrder": 6
+  }
+]

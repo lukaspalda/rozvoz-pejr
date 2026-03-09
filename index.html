@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozvoz Pejr — Jídlo z Pelhřimova až k tobě</title>
+    <meta name="description" content="Objednejte si jídlo z oblíbených restaurací v Pelhřimově. Dovoz až k vám domů — King Kebab, Gelato Pizza Stella, Gábl bistro a další.">
+    <meta name="theme-color" content="#3D2B1F">
+    <meta property="og:title" content="Rozvoz Pejr — Jídlo z Pelhřimova až k tobě">
+    <meta property="og:description" content="Objednávkový web pro rozvoz jídla z restaurací v Pelhřimově a okolí do 10 km.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <div class="logo" onclick="showRestaurants()">
+            <div class="logo-icon">🛵</div>
+            <div class="logo-text">ROZVOZ <span>PEJR</span></div>
+        </div>
+        <div class="header-info">
+            <span id="status-badge" class="status-badge status-closed">
+                <span class="status-dot"></span>
+                <span id="status-text">Zavřeno</span>
+            </span>
+            <a href="tel:+420773020348">📞 773 020 348</a>
+        </div>
+    </div>
+</header>
+
+<!-- Main content — 4 views -->
+<main class="main">
+
+    <!-- View 1: Restaurant picker -->
+    <div id="view-restaurants">
+        <div class="hero">
+            <h1>🍕 Jídlo z Pelhřimova až k tobě</h1>
+            <p>Vyber si restauraci, sestav objednávku a my ti ji přivezeme</p>
+            <div class="hero-stats">
+                <span>📍 Pelhřimov a okolí do 10 km</span>
+                <span class="hours-trigger" style="cursor:pointer" onclick="toggleHours()">🕐 Otevírací doba</span>
+            </div>
+        </div>
+        <div id="restaurants-grid" class="restaurants-grid">
+            <div class="loading"><div class="spinner"></div>Načítám restaurace…</div>
+        </div>
+    </div>
+
+    <!-- View 2: Menu -->
+    <div id="view-menu" class="hidden">
+        <button class="back-btn" onclick="showRestaurants()">← Zpět na restaurace</button>
+        <div class="menu-header">
+            <h2 id="menu-title"></h2>
+            <div id="menu-tags" class="restaurant-tags"></div>
+        </div>
+        <div id="category-tabs" class="category-tabs"></div>
+        <div id="menu-items"></div>
+    </div>
+
+    <!-- View 3: Checkout -->
+    <div id="view-checkout" class="hidden">
+        <button class="back-btn" onclick="showMenu(currentRestaurant)">← Zpět na menu</button>
+        <div class="checkout-section">
+            <h2>📋 Dokončit objednávku</h2>
+
+            <div id="checkout-items" class="checkout-items"></div>
+
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Jméno <span class="required">*</span></label>
+                    <input type="text" id="c-name" required placeholder="Vaše jméno" maxlength="100">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefon <span class="required">*</span></label>
+                        <input type="tel" id="c-phone" required placeholder="773 020 348" maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Čas doručení</label>
+                        <select id="c-time">
+                            <option value="co nejdříve">Co nejdříve</option>
+                            <option value="do 30 min">Do 30 minut</option>
+                            <option value="do 45 min">Do 45 minut</option>
+                            <option value="do 60 min">Do 60 minut</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Adresa doručení <span class="required">*</span></label>
+                    <input type="text" id="c-address" required placeholder="Ulice, číslo, město" maxlength="200">
+                </div>
+                <div class="form-group">
+                    <label>Platba</label>
+                    <div class="payment-options">
+                        <div class="payment-option selected" data-payment="cash" onclick="selectPayment(this)">
+                            <div class="payment-icon">💵</div>
+                            Hotově
+                        </div>
+                        <div class="payment-option" data-payment="card" onclick="selectPayment(this)">
+                            <div class="payment-icon">💳</div>
+                            Kartou
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Poznámka</label>
+                    <textarea id="c-note" placeholder="Zvláštní požadavky, patro, zvonek…" maxlength="500"></textarea>
+                </div>
+                <button type="submit" class="submit-order-btn" id="submit-btn">
+                    🛵 Odeslat objednávku
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View 4: Confirmation -->
+    <div id="view-confirmation" class="hidden">
+        <div class="confirmation">
+            <div class="confirmation-icon">✅</div>
+            <h2>Objednávka přijata!</h2>
+            <p>Vaše objednávka byla úspěšně odeslána.</p>
+            <div class="order-id" id="confirm-order-id"></div>
+            <p>Brzy se vám ozveme na telefon pro potvrzení.</p>
+            <p style="color:var(--text-light);font-size:0.85rem">V případě dotazů volejte <a href="tel:+420773020348">773 020 348</a></p>
+            <button class="new-order-btn" onclick="newOrder()">🍕 Nová objednávka</button>
+        </div>
+    </div>
+
+</main>
+
+<!-- Floating cart bar -->
+<div id="cart-bar" class="cart-bar">
+    <div class="cart-bar-inner" onclick="openCart()">
+        <div class="cart-bar-left">
+            <div class="cart-badge" id="cart-count">0</div>
+            <span class="cart-bar-text">Zobrazit košík</span>
+        </div>
+        <div class="cart-bar-total" id="cart-total">0 Kč</div>
+    </div>
+</div>
+
+<!-- Cart overlay -->
+<div id="cart-overlay" class="cart-overlay" onclick="closeCartIfBackground(event)">
+    <div class="cart-panel">
+        <div class="cart-handle"></div>
+        <div class="cart-header">
+            <h2>🛒 Košík</h2>
+            <button class="cart-clear" onclick="clearCart()">Vysypat</button>
+        </div>
+        <div class="cart-restaurant" id="cart-restaurant"></div>
+        <div id="cart-items"></div>
+        <div id="cart-summary" class="cart-summary"></div>
+        <button class="checkout-btn" id="cart-checkout-btn" onclick="goToCheckout()">
+            Pokračovat k objednávce
+        </button>
+    </div>
+</div>
+
+<!-- Hours popup -->
+<div id="hours-popup" class="hours-popup" onclick="toggleHours()">
+    <div class="hours-content" onclick="event.stopPropagation()">
+        <h3>🕐 Otevírací doba</h3>
+        <div class="hours-row" id="h-po"><span>Pondělí</span><span>10:00–15:00, 17:00–20:00</span></div>
+        <div class="hours-row" id="h-ut"><span>Úterý</span><span>10:00–15:00, 17:00–20:00</span></div>
+        <div class="hours-row" id="h-st"><span>Středa</span><span>10:00–15:00, 17:00–20:00</span></div>
+        <div class="hours-row" id="h-ct"><span>Čtvrtek</span><span>10:00–15:00, 17:00–20:00</span></div>
+        <div class="hours-row" id="h-pa"><span>Pátek</span><span>10:00–15:00, 17:00–22:00</span></div>
+        <div class="hours-row" id="h-so"><span>Sobota</span><span>10:00–15:00, 17:00–21:00</span></div>
+        <div class="hours-row" id="h-ne"><span>Neděle</span><span>17:00–20:00</span></div>
+        <button class="hours-close" onclick="toggleHours()">Zavřít</button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="tel:+420773020348">📞 773 020 348</a>
+        <a href="https://www.instagram.com/rozvozpejr/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/groups/768759486242247" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p>© 2026 Rozvoz Pejr — Pelhřimov a okolí</p>
+</footer>
+
+<script src="js/app.js?v=1"></script>
+</body>
+</html>

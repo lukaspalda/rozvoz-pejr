@@ -1,0 +1,86 @@
+{
+  "restaurantId": "king-kebab",
+  "categories": [
+    {
+      "name": "Tortilla",
+      "items": [
+        { "name": "Tortilla Klasik", "description": "Maso, zelenina, dresink", "price": 135, "available": true },
+        { "name": "Tortilla Vegetarian", "description": "Falafel, zelenina, dresink", "price": 135, "available": true },
+        { "name": "Tortilla se sýrem", "description": "Maso, sýr, zelenina, dresink", "price": 155, "available": true },
+        { "name": "Tortilla jen maso", "description": "Dvojitá porce masa, dresink", "price": 180, "available": true }
+      ]
+    },
+    {
+      "name": "Pita chleba",
+      "items": [
+        { "name": "Pita Klasik", "description": "Maso, zelenina, dresink v pitě", "price": 135, "available": true },
+        { "name": "Pita Vegetarian", "description": "Falafel, zelenina, dresink", "price": 135, "available": true },
+        { "name": "Pita se sýrem", "description": "Maso, sýr, zelenina, dresink", "price": 155, "available": true },
+        { "name": "Pita jen maso", "description": "Dvojitá porce masa, dresink", "price": 180, "available": true }
+      ]
+    },
+    {
+      "name": "Boxy",
+      "items": [
+        { "name": "Box malý Klasik", "description": "Maso, hranolky, zelenina, dresink", "price": 125, "available": true },
+        { "name": "Box malý se sýrem", "description": "Maso, sýr, hranolky, zelenina", "price": 145, "available": true },
+        { "name": "Box malý jen maso", "description": "Dvojitá porce masa, hranolky", "price": 160, "available": true },
+        { "name": "Box velký Klasik", "description": "Větší porce masa, hranolky, zelenina", "price": 145, "available": true },
+        { "name": "Box velký se sýrem", "description": "Větší porce, sýr, hranolky, zelenina", "price": 165, "available": true },
+        { "name": "Box velký jen maso", "description": "Velká porce masa, hranolky", "price": 180, "available": true }
+      ]
+    },
+    {
+      "name": "French Tacos & Quesadilla",
+      "items": [
+        { "name": "French Tacos Klasik", "description": "Maso, sýr, hranolky v tortille", "price": 195, "available": true },
+        { "name": "French Tacos Vegetarian", "description": "Falafel, sýr, hranolky v tortille", "price": 195, "available": true },
+        { "name": "Quesadilla Klasik", "description": "Tortilla s masem a sýrem", "price": 195, "available": true },
+        { "name": "Quesadilla Vegetarian", "description": "Tortilla se zeleninou a sýrem", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Talíře",
+      "items": [
+        { "name": "Talíř malý Klasik", "description": "Maso, rýže, zelenina, dresink", "price": 160, "available": true },
+        { "name": "Talíř malý s chlebem", "description": "Maso, chléb, zelenina, dresink", "price": 160, "available": true },
+        { "name": "Talíř malý jen maso", "description": "Dvojitá porce masa, rýže", "price": 210, "available": true },
+        { "name": "Talíř velký Klasik", "description": "Větší porce, rýže, zelenina", "price": 195, "available": true },
+        { "name": "Talíř velký s chlebem", "description": "Větší porce, chléb, zelenina", "price": 195, "available": true },
+        { "name": "Talíř velký jen maso", "description": "Velká porce masa, rýže", "price": 220, "available": true }
+      ]
+    },
+    {
+      "name": "Kuřecí menu",
+      "items": [
+        { "name": "Stripsy", "description": "Kuřecí stripsy, hranolky, dresink", "price": 195, "available": true },
+        { "name": "Nugety", "description": "Kuřecí nugety, hranolky, dresink", "price": 195, "available": true },
+        { "name": "Kuřecí řízek", "description": "Kuřecí řízek, hranolky, dresink", "price": 195, "available": true },
+        { "name": "Smažák v pitě", "description": "Smažený sýr v pitě se zeleninou", "price": 135, "available": true }
+      ]
+    },
+    {
+      "name": "Sýrové menu",
+      "items": [
+        { "name": "Mozzarella sticks", "description": "Smažené mozzarella tyčinky, hranolky", "price": 150, "available": true },
+        { "name": "Chilli cheese", "description": "Chilli cheese nugety, hranolky", "price": 150, "available": true },
+        { "name": "Smažák", "description": "Smažený sýr, hranolky, tatarka", "price": 150, "available": true }
+      ]
+    },
+    {
+      "name": "Saláty",
+      "items": [
+        { "name": "Caesar salát", "description": "Kuřecí maso, parmazán, krutony", "price": 150, "available": true },
+        { "name": "Řecký salát", "description": "Feta, olivy, rajčata, okurka", "price": 150, "available": true },
+        { "name": "Kebab salát", "description": "Kebab maso, zelenina, dresink", "price": 150, "available": true }
+      ]
+    },
+    {
+      "name": "Přílohy a extra",
+      "items": [
+        { "name": "Příloha (hranolky/rýže)", "description": "Porce hranolek nebo rýže", "price": 75, "available": true },
+        { "name": "Extra ingredience", "description": "Přídavek masa, sýru nebo zeleniny", "price": 20, "available": true }
+      ]
+    }
+  ]
+}

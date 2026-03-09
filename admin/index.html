@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozvoz Pejr — Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --primary: #D4822A;
+            --primary-dark: #B86D1F;
+            --brown: #3D2B1F;
+            --cream: #FFF8F0;
+            --cream-dark: #F5EBDD;
+            --text: #2D2013;
+            --text-light: #7A6B5D;
+            --success: #2E7D32;
+            --success-bg: #E8F5E9;
+            --danger: #C62828;
+            --danger-bg: #FFEBEE;
+            --warning: #F57F17;
+            --warning-bg: #FFF8E1;
+            --info: #1565C0;
+            --info-bg: #E3F2FD;
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--cream); color: var(--text); }
+
+        /* Login */
+        .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .login-box { background: #fff; padding: 32px; border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,0.1); width: 340px; text-align: center; }
+        .login-box h1 { font-size: 1.5rem; color: var(--brown); margin-bottom: 4px; }
+        .login-box p { color: var(--text-light); font-size: 0.85rem; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--cream-dark); border-radius: var(--radius-sm); font-size: 0.95rem; margin-bottom: 12px; }
+        .login-box input:focus { outline: none; border-color: var(--primary); }
+        .login-box button { width: 100%; padding: 12px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .login-box button:hover { background: var(--primary-dark); }
+        .login-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 12px; display: none; }
+
+        /* Dashboard */
+        .dashboard { display: none; }
+        .dash-header { background: var(--brown); color: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+        .dash-header h1 { font-size: 1.1rem; font-weight: 700; }
+        .dash-header h1 span { color: var(--primary); }
+        .dash-logout { background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        .dash-logout:hover { background: rgba(255,255,255,0.1); }
+
+        /* Tabs */
+        .dash-tabs { display: flex; gap: 0; background: #fff; border-bottom: 2px solid var(--cream-dark); }
+        .dash-tab { padding: 12px 20px; font-size: 0.9rem; font-weight: 600; cursor: pointer; color: var(--text-light); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+        .dash-tab:hover { color: var(--primary); }
+        .dash-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        .dash-content { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+        /* Orders */
+        .orders-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .orders-header h2 { font-size: 1.2rem; }
+        .orders-date { padding: 6px 10px; border: 1px solid var(--cream-dark); border-radius: var(--radius-sm); font-size: 0.85rem; }
+
+        .order-card { background: #fff; border-radius: var(--radius); padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+        .order-card.status-new { border-left-color: var(--danger); }
+        .order-card.status-confirmed { border-left-color: var(--info); }
+        .order-card.status-preparing { border-left-color: var(--warning); }
+        .order-card.status-delivering { border-left-color: var(--primary); }
+        .order-card.status-delivered { border-left-color: var(--success); }
+        .order-card.status-cancelled { border-left-color: #999; opacity: 0.6; }
+
+        .order-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+        .order-id { font-weight: 700; font-size: 0.95rem; }
+        .order-time { font-size: 0.8rem; color: var(--text-light); }
+
+        .order-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .badge-new { background: var(--danger-bg); color: var(--danger); }
+        .badge-confirmed { background: var(--info-bg); color: var(--info); }
+        .badge-preparing { background: var(--warning-bg); color: var(--warning); }
+        .badge-delivering { background: rgba(212,130,42,0.1); color: var(--primary-dark); }
+        .badge-delivered { background: var(--success-bg); color: var(--success); }
+        .badge-cancelled { background: #f5f5f5; color: #999; }
+
+        .order-customer { font-size: 0.85rem; margin-bottom: 8px; }
+        .order-customer strong { color: var(--brown); }
+        .order-items { font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px; }
+
+        .order-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+        .order-action-btn { padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-confirm { background: var(--info-bg); color: var(--info); }
+        .btn-prepare { background: var(--warning-bg); color: var(--warning); }
+        .btn-deliver { background: rgba(212,130,42,0.1); color: var(--primary-dark); }
+        .btn-done { background: var(--success-bg); color: var(--success); }
+        .btn-cancel { background: var(--danger-bg); color: var(--danger); }
+        .order-action-btn:hover { filter: brightness(0.95); }
+
+        .no-orders { text-align: center; padding: 48px; color: var(--text-light); }
+
+        /* Restaurant toggles */
+        .rest-list { list-style: none; }
+        .rest-item { background: #fff; padding: 14px 16px; border-radius: var(--radius-sm); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .rest-item h3 { font-size: 0.95rem; font-weight: 600; }
+        .rest-item p { font-size: 0.8rem; color: var(--text-light); }
+
+        /* Toggle switch */
+        .toggle { position: relative; width: 44px; height: 24px; cursor: pointer; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; inset: 0; background: #ccc; border-radius: 24px; transition: 0.2s; }
+        .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+        .toggle input:checked + .toggle-slider { background: var(--success); }
+        .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+        .hidden { display: none !important; }
+
+        /* Toast */
+        .admin-toast { position: fixed; bottom: 20px; right: 20px; background: var(--brown); color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; z-index: 1000; opacity: 0; transform: translateY(20px); transition: all 0.3s; pointer-events: none; }
+        .admin-toast.show { opacity: 1; transform: translateY(0); }
+
+        /* Sound indicator */
+        .sound-indicator { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+        @media (max-width: 600px) {
+            .dash-tab { padding: 10px 12px; font-size: 0.8rem; }
+            .order-top { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="login-screen" class="login-screen">
+    <div class="login-box">
+        <h1>🛵 Rozvoz Pejr</h1>
+        <p>Admin panel</p>
+        <div id="login-error" class="login-error"></div>
+        <input type="password" id="login-password" placeholder="Heslo" onkeydown="if(event.key==='Enter')login()">
+        <button onclick="login()">Přihlásit se</button>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="dashboard">
+    <div class="dash-header">
+        <h1>🛵 ROZVOZ <span>PEJR</span> — Admin</h1>
+        <div style="display:flex;align-items:center;gap:12px">
+            <span class="sound-indicator" id="sound-status">🔔 Zvuk zapnutý</span>
+            <button class="dash-logout" onclick="logout()">Odhlásit</button>
+        </div>
+    </div>
+
+    <div class="dash-tabs">
+        <div class="dash-tab active" data-tab="orders" onclick="switchTab('orders')">📋 Objednávky</div>
+        <div class="dash-tab" data-tab="restaurants" onclick="switchTab('restaurants')">🏪 Restaurace</div>
+    </div>
+
+    <!-- Orders tab -->
+    <div id="tab-orders" class="dash-content">
+        <div class="orders-header">
+            <h2>Dnešní objednávky</h2>
+            <input type="date" class="orders-date" id="orders-date" onchange="loadOrders()">
+        </div>
+        <div id="orders-list">
+            <div class="no-orders">Načítám objednávky…</div>
+        </div>
+    </div>
+
+    <!-- Restaurants tab -->
+    <div id="tab-restaurants" class="dash-content hidden">
+        <h2 style="margin-bottom:16px">Restaurace</h2>
+        <div id="restaurants-list"></div>
+    </div>
+</div>
+
+<div id="admin-toast" class="admin-toast"></div>
+
+<script>
+(function() {
+'use strict';
+
+const API = '/api';
+let sessionToken = localStorage.getItem('pejr-admin-session');
+let pollInterval = null;
+let lastOrderCount = 0;
+let soundEnabled = true;
+
+// ── Status labels ──
+const STATUS_LABELS = {
+    new: 'Nová',
+    confirmed: 'Potvrzená',
+    preparing: 'Připravuje se',
+    delivering: 'Doručuje se',
+    delivered: 'Doručena',
+    cancelled: 'Zrušená'
+};
+
+// ── Init ──
+if (sessionToken) {
+    showDashboard();
+}
+
+function showDashboard() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('orders-date').value = new Date().toISOString().slice(0, 10);
+    loadOrders();
+    loadRestaurants();
+    startPolling();
+}
+
+// ── Auth ──
+window.login = async function() {
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+    if (!password) { errEl.textContent = 'Zadejte heslo'; errEl.style.display = 'block'; return; }
+
+    try {
+        const res = await fetch(API + '/pejr-auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        sessionToken = data.sessionToken;
+        localStorage.setItem('pejr-admin-session', sessionToken);
+        errEl.style.display = 'none';
+        showDashboard();
+    } catch (err) {
+        errEl.textContent = err.message;
+        errEl.style.display = 'block';
+    }
+};
+
+window.logout = function() {
+    sessionToken = null;
+    localStorage.removeItem('pejr-admin-session');
+    stopPolling();
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-password').value = '';
+};
+
+// ── API helper ──
+async function api(endpoint, body) {
+    const res = await fetch(API + endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, sessionToken })
+    });
+    const data = await res.json();
+    if (res.status === 401) { logout(); throw new Error('Session expired'); }
+    if (!res.ok) throw new Error(data.error || 'Chyba serveru');
+    return data;
+}
+
+// ── Tabs ──
+window.switchTab = function(tab) {
+    document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.dash-tab[data-tab="${tab}"]`).classList.add('active');
+    document.querySelectorAll('.dash-content').forEach(c => c.classList.add('hidden'));
+    document.getElementById('tab-' + tab).classList.remove('hidden');
+};
+
+// ── Orders ──
+window.loadOrders = async function() {
+    const date = document.getElementById('orders-date').value;
+    try {
+        const data = await api('/pejr-orders', { action: 'list', date });
+        renderOrders(data.orders || []);
+    } catch (err) {
+        document.getElementById('orders-list').innerHTML = '<div class="no-orders">Chyba: ' + err.message + '</div>';
+    }
+};
+
+function renderOrders(orders) {
+    const container = document.getElementById('orders-list');
+    if (!orders.length) {
+        container.innerHTML = '<div class="no-orders">📦 Zatím žádné objednávky</div>';
+        return;
+    }
+
+    // New orders on top
+    orders.sort((a, b) => {
+        const statusOrder = { new: 0, confirmed: 1, preparing: 2, delivering: 3, delivered: 4, cancelled: 5 };
+        return (statusOrder[a.status] || 0) - (statusOrder[b.status] || 0);
+    });
+
+    // Notify on new orders
+    const newCount = orders.filter(o => o.status === 'new').length;
+    if (newCount > lastOrderCount && lastOrderCount > 0) {
+        playNotification();
+    }
+    lastOrderCount = newCount;
+
+    container.innerHTML = orders.map(o => {
+        const time = new Date(o.createdAt).toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+        const items = o.items.map(i => `${i.quantity}× ${i.name}`).join(', ');
+        const badgeClass = 'badge-' + o.status;
+        const statusLabel = STATUS_LABELS[o.status] || o.status;
+
+        let actions = '';
+        switch (o.status) {
+            case 'new':
+                actions = `
+                    <button class="order-action-btn btn-confirm" onclick="updateStatus('${o.orderId}','confirmed')">✓ Potvrdit</button>
+                    <button class="order-action-btn btn-cancel" onclick="updateStatus('${o.orderId}','cancelled')">✕ Zrušit</button>`;
+                break;
+            case 'confirmed':
+                actions = `<button class="order-action-btn btn-prepare" onclick="updateStatus('${o.orderId}','preparing')">👨‍🍳 Připravuje se</button>`;
+                break;
+            case 'preparing':
+                actions = `<button class="order-action-btn btn-deliver" onclick="updateStatus('${o.orderId}','delivering')">🛵 Na cestě</button>`;
+                break;
+            case 'delivering':
+                actions = `<button class="order-action-btn btn-done" onclick="updateStatus('${o.orderId}','delivered')">✅ Doručeno</button>`;
+                break;
+        }
+
+        return `
+            <div class="order-card status-${o.status}">
+                <div class="order-top">
+                    <div>
+                        <span class="order-id">${o.orderId}</span>
+                        <span class="order-badge ${badgeClass}">${statusLabel}</span>
+                    </div>
+                    <span class="order-time">${time} — ${o.restaurantName}</span>
+                </div>
+                <div class="order-customer">
+                    <strong>${o.customer.name}</strong> · 📞 <a href="tel:${o.customer.phone}">${o.customer.phone}</a><br>
+                    📍 ${o.customer.address}
+                    ${o.customer.note ? `<br>📝 ${o.customer.note}` : ''}
+                    <br>🕐 ${o.deliveryTime} · 💳 ${o.payment === 'card' ? 'Kartou' : 'Hotově'}
+                </div>
+                <div class="order-items">${items}</div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <strong style="font-size:1.05rem;color:var(--brown)">${o.total} Kč</strong>
+                    <div class="order-actions">${actions}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+window.updateStatus = async function(orderId, status) {
+    try {
+        const date = document.getElementById('orders-date').value;
+        await api('/pejr-orders', { action: 'update-status', orderId, status, date });
+        showAdminToast('✓ Status aktualizován');
+        loadOrders();
+    } catch (err) {
+        showAdminToast('❌ ' + err.message);
+    }
+};
+
+// ── Restaurants ──
+async function loadRestaurants() {
+    try {
+        const data = await api('/pejr-admin', { action: 'list-restaurants' });
+        renderRestaurantsList(data.restaurants || []);
+    } catch (err) {
+        console.error('Failed to load restaurants:', err);
+    }
+}
+
+function renderRestaurantsList(restaurants) {
+    const container = document.getElementById('restaurants-list');
+    container.innerHTML = '<ul class="rest-list">' + restaurants.map(r => `
+        <li class="rest-item">
+            <div>
+                <h3>${r.name}</h3>
+                <p>${r.description} · Min. ${r.minOrder} Kč · Dovoz ${r.deliveryFee} Kč</p>
+            </div>
+            <label class="toggle">
+                <input type="checkbox" ${r.active ? 'checked' : ''} onchange="toggleRestaurant('${r.id}', this.checked)">
+                <span class="toggle-slider"></span>
+            </label>
+        </li>
+    `).join('') + '</ul>';
+}
+
+window.toggleRestaurant = async function(id, active) {
+    try {
+        await api('/pejr-admin', { action: 'toggle-restaurant', restaurantId: id, active });
+        showAdminToast(active ? '✓ Restaurace aktivována' : '✓ Restaurace deaktivována');
+    } catch (err) {
+        showAdminToast('❌ ' + err.message);
+        loadRestaurants();
+    }
+};
+
+// ── Polling ──
+function startPolling() {
+    pollInterval = setInterval(loadOrders, 30000);
+}
+
+function stopPolling() {
+    if (pollInterval) clearInterval(pollInterval);
+}
+
+// ── Notifications ──
+function playNotification() {
+    if (!soundEnabled) return;
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        osc.frequency.setValueAtTime(1000, ctx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(800, ctx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.5);
+    } catch {}
+
+    // Browser notification
+    if (Notification.permission === 'granted') {
+        new Notification('🍕 Nová objednávka!', { body: 'Přišla nová objednávka v Rozvoz Pejr' });
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission();
+    }
+}
+
+function showAdminToast(msg) {
+    const toast = document.getElementById('admin-toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// Request notification permission on load
+if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+}
+
+})();
+</script>
+</body>
+</html>

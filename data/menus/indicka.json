@@ -1,0 +1,55 @@
+{
+  "restaurantId": "indicka",
+  "categories": [
+    {
+      "name": "Předkrmy",
+      "items": [
+        { "name": "Samosa (2 ks)", "description": "Smažené taštičky plněné bramborami a hráškem", "price": 85, "available": true },
+        { "name": "Pakora", "description": "Zelenina v cizrnovém těstíčku", "price": 95, "available": true },
+        { "name": "Chicken Tikka", "description": "Marinované kuřecí kousky z tandoori pece", "price": 135, "available": true }
+      ]
+    },
+    {
+      "name": "Kuřecí curry",
+      "items": [
+        { "name": "Butter Chicken", "description": "Kuřecí v krémové rajčatové omáčce s máslem", "price": 195, "available": true },
+        { "name": "Chicken Tikka Masala", "description": "Kuřecí tikka v kořeněné masala omáčce", "price": 195, "available": true },
+        { "name": "Chicken Korma", "description": "Kuřecí v jemné jogurtovo-mandlové omáčce", "price": 195, "available": true },
+        { "name": "Chicken Vindaloo", "description": "Kuřecí ve velmi pálivé omáčce", "price": 195, "available": true },
+        { "name": "Chicken Madras", "description": "Kuřecí v pikantní kokosové omáčce", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Jehněčí curry",
+      "items": [
+        { "name": "Lamb Rogan Josh", "description": "Jehněčí v kořeněné rajčatové omáčce", "price": 245, "available": true },
+        { "name": "Lamb Korma", "description": "Jehněčí v jemné jogurtovo-mandlové omáčce", "price": 245, "available": true }
+      ]
+    },
+    {
+      "name": "Vegetariánské",
+      "items": [
+        { "name": "Palak Paneer", "description": "Indický sýr ve špenátové omáčce", "price": 175, "available": true },
+        { "name": "Chana Masala", "description": "Cizrna v kořeněné rajčatové omáčce", "price": 165, "available": true },
+        { "name": "Dal Tadka", "description": "Červená čočka s kořením a bylinkami", "price": 155, "available": true },
+        { "name": "Aloo Gobi", "description": "Brambory a květák s kurkumou a kořením", "price": 165, "available": true }
+      ]
+    },
+    {
+      "name": "Tandoori speciality",
+      "items": [
+        { "name": "Tandoori Chicken", "description": "Půlka kuřete marinovaná v jogurtu a koření, pečená v tandoori peci", "price": 225, "available": true },
+        { "name": "Seekh Kebab", "description": "Mleté maso na špízu s bylinkami z tandoori pece", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Přílohy",
+      "items": [
+        { "name": "Basmati rýže", "description": "Voňavá basmati rýže", "price": 55, "available": true },
+        { "name": "Naan chléb", "description": "Tradiční indický chléb z tandoori pece", "price": 55, "available": true },
+        { "name": "Garlic Naan", "description": "Naan s česnekem a koriandrem", "price": 65, "available": true },
+        { "name": "Raita", "description": "Jogurtový dip s okurkou a mátou", "price": 45, "available": true }
+      ]
+    }
+  ]
+}

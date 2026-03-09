@@ -1,0 +1,52 @@
+{
+  "restaurantId": "hodovna",
+  "categories": [
+    {
+      "name": "Polévky",
+      "items": [
+        { "name": "Česnečka", "description": "Česneková polévka s krutonky a sýrem", "price": 55, "available": true },
+        { "name": "Gulášová polévka", "description": "Hustá hovězí gulášová polévka s chlebem", "price": 65, "available": true }
+      ]
+    },
+    {
+      "name": "Hlavní jídla",
+      "items": [
+        { "name": "Svíčková na smetaně", "description": "Hovězí svíčková, houskový knedlík, brusinka, šlehačka", "price": 195, "available": true },
+        { "name": "Vepřo-knedlo-zelo", "description": "Pečené vepřové, houskový knedlík, dušené zelí", "price": 185, "available": true },
+        { "name": "Smažený řízek", "description": "Vepřový řízek, bramborový salát", "price": 185, "available": true },
+        { "name": "Kuřecí steak", "description": "Grilovaný kuřecí steak s bylinkovým máslem, hranolky", "price": 195, "available": true },
+        { "name": "Hovězí guláš", "description": "Hovězí guláš, houskový knedlík", "price": 185, "available": true },
+        { "name": "Smažený sýr", "description": "Eidam v trojobalu, hranolky, tatarská omáčka", "price": 155, "available": true }
+      ]
+    },
+    {
+      "name": "Grilované speciality",
+      "items": [
+        { "name": "Žebírka v medu", "description": "Vepřová žebírka glazovaná medem, pečivo", "price": 245, "available": true },
+        { "name": "Grilovaná kolena", "description": "Pečené vepřové koleno s křenem a hořčicí", "price": 265, "available": true },
+        { "name": "Mix gril", "description": "Kuřecí, vepřové, klobása, zelenina, hranolky", "price": 285, "available": true }
+      ]
+    },
+    {
+      "name": "Saláty",
+      "items": [
+        { "name": "Kuřecí salát", "description": "Grilované kuřecí, mix salátu, rajčata, dresink", "price": 165, "available": true }
+      ]
+    },
+    {
+      "name": "Přílohy",
+      "items": [
+        { "name": "Hranolky", "description": "Porce hranolek", "price": 65, "available": true },
+        { "name": "Houskový knedlík", "description": "3 plátky houskového knedlíku", "price": 35, "available": true },
+        { "name": "Bramborový salát", "description": "Domácí bramborový salát", "price": 55, "available": true }
+      ]
+    },
+    {
+      "name": "Dezerty",
+      "items": [
+        { "name": "Palačinky s marmeládou", "description": "2 palačinky s marmeládou a šlehačkou", "price": 85, "available": true },
+        { "name": "Medovník", "description": "Domácí medovník", "price": 75, "available": true }
+      ]
+    }
+  ]
+}

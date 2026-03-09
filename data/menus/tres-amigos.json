@@ -1,0 +1,51 @@
+{
+  "restaurantId": "tres-amigos",
+  "categories": [
+    {
+      "name": "Burritos",
+      "items": [
+        { "name": "Burrito Pollo", "description": "Kuřecí, rýže, fazole, sýr, salsa, zakysaná smetana", "price": 185, "available": true },
+        { "name": "Burrito Carne", "description": "Hovězí, rýže, fazole, sýr, salsa, zakysaná smetana", "price": 195, "available": true },
+        { "name": "Burrito Veggie", "description": "Grilovaná zelenina, rýže, fazole, guacamole", "price": 175, "available": true }
+      ]
+    },
+    {
+      "name": "Tacos (3 ks)",
+      "items": [
+        { "name": "Tacos al Pastor", "description": "Marinované vepřové, cibule, koriandr, limetka", "price": 165, "available": true },
+        { "name": "Tacos de Pollo", "description": "Kuřecí, salát, salsa, zakysaná smetana", "price": 155, "available": true },
+        { "name": "Tacos de Carne", "description": "Hovězí, salát, salsa, cheddar", "price": 175, "available": true }
+      ]
+    },
+    {
+      "name": "Quesadillas",
+      "items": [
+        { "name": "Quesadilla Pollo", "description": "Kuřecí, sýr, paprika, cibule", "price": 165, "available": true },
+        { "name": "Quesadilla Carne", "description": "Hovězí, sýr, paprika, jalapeño", "price": 175, "available": true },
+        { "name": "Quesadilla Veggie", "description": "Grilovaná zelenina, sýr, fazole", "price": 155, "available": true }
+      ]
+    },
+    {
+      "name": "Nachos",
+      "items": [
+        { "name": "Nachos Grande", "description": "Tortilla chipsy, cheddar, jalapeño, salsa, guacamole, zakysaná smetana", "price": 175, "available": true },
+        { "name": "Nachos s kuřecím", "description": "Nachos s kuřecím masem a sýrem", "price": 195, "available": true }
+      ]
+    },
+    {
+      "name": "Bowls",
+      "items": [
+        { "name": "Burrito Bowl Pollo", "description": "Jako burrito, ale v misce — kuřecí, rýže, fazole, salsa", "price": 175, "available": true },
+        { "name": "Burrito Bowl Carne", "description": "Hovězí, rýže, fazole, salsa, guacamole", "price": 185, "available": true }
+      ]
+    },
+    {
+      "name": "Přílohy a dipy",
+      "items": [
+        { "name": "Guacamole s chipsy", "description": "Čerstvé guacamole s tortilla chipsy", "price": 95, "available": true },
+        { "name": "Mexická rýže", "description": "Rýže s rajčaty a kořením", "price": 55, "available": true },
+        { "name": "Jalapeño poppers", "description": "Plněné jalapeño se sýrem, smažené", "price": 85, "available": true }
+      ]
+    }
+  ]
+}
