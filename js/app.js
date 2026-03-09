@@ -76,6 +76,17 @@ function showView(viewId) {
         document.getElementById(id).classList.add('hidden');
     });
     document.getElementById(viewId).classList.remove('hidden');
+
+    // Hero + trust strip are outside <main>, show only on restaurant view
+    const heroSection = document.getElementById('view-restaurants-hero');
+    if (heroSection) {
+        if (viewId === 'view-restaurants') {
+            heroSection.classList.remove('hidden');
+        } else {
+            heroSection.classList.add('hidden');
+        }
+    }
+
     window.scrollTo(0, 0);
 }
 
