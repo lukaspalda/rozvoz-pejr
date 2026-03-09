@@ -9,7 +9,10 @@
     "active": true,
     "minOrder": 150,
     "deliveryFee": 49,
-    "sortOrder": 1
+    "sortOrder": 1,
+    "address": "Nádražní 809, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Nádražní+809,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   },
   {
     "id": "king-kebab",
@@ -21,7 +24,10 @@
     "active": true,
     "minOrder": 130,
     "deliveryFee": 49,
-    "sortOrder": 2
+    "sortOrder": 2,
+    "address": "Svatovítské nám. 315, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Svatovítské+nám.+315,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   },
   {
     "id": "gelato-pizza",
@@ -33,7 +39,10 @@
     "active": true,
     "minOrder": 150,
     "deliveryFee": 49,
-    "sortOrder": 3
+    "sortOrder": 3,
+    "address": "Nádražní 831, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Nádražní+831,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   },
   {
     "id": "indicka",
@@ -45,7 +54,10 @@
     "active": true,
     "minOrder": 200,
     "deliveryFee": 49,
-    "sortOrder": 4
+    "sortOrder": 4,
+    "address": "Arch. Janáka 1193, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Arch.+Janáka+1193,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   },
   {
     "id": "tres-amigos",
@@ -57,7 +69,10 @@
     "active": true,
     "minOrder": 150,
     "deliveryFee": 49,
-    "sortOrder": 5
+    "sortOrder": 5,
+    "address": "Dr. Tyrše 58, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Dr.+Tyrše+58,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   },
   {
     "id": "hodovna",
@@ -69,6 +84,9 @@
     "active": true,
     "minOrder": 150,
     "deliveryFee": 49,
-    "sortOrder": 6
+    "sortOrder": 6,
+    "address": "Příkopy 25, Pelhřimov",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=Příkopy+25,+Pelhřimov",
+    "freeDeliveryThreshold": 300
   }
 ]

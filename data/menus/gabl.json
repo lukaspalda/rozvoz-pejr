@@ -10,11 +10,11 @@
     {
       "name": "Hlavní jídla",
       "items": [
-        { "name": "Burger Classic", "description": "Hovězí maso, cheddar, rajče, salát, BBQ omáčka, hranolky", "price": 195, "available": true },
+        { "name": "Burger Classic", "description": "Hovězí maso, cheddar, rajče, salát, BBQ omáčka, hranolky", "price": 195, "available": true, "popular": true },
         { "name": "Chicken Burger", "description": "Kuřecí prsa, coleslaw, majonéza, hranolky", "price": 185, "available": true },
         { "name": "Smažený sýr", "description": "Eidam v trojobalu, hranolky, tatarka", "price": 155, "available": true },
         { "name": "Kuřecí řízek", "description": "Kuřecí prsa v trojobalu, bramborový salát", "price": 175, "available": true },
-        { "name": "Gábl Bowl", "description": "Rýže, kuřecí, avokádo, edamame, dresink", "price": 185, "available": true },
+        { "name": "Gábl Bowl", "description": "Rýže, kuřecí, avokádo, edamame, dresink", "price": 185, "available": true, "popular": true },
         { "name": "Fish & Chips", "description": "Smažená treska, hranolky, tatarka", "price": 195, "available": true }
       ]
     },

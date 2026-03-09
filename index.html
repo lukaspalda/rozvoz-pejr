@@ -9,7 +9,7 @@
     <meta property="og:title" content="Rozvoz Pejr — Jídlo z Pelhřimova až k tobě">
     <meta property="og:description" content="Objednávkový web pro rozvoz jídla z restaurací v Pelhřimově a okolí do 10 km.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
@@ -35,26 +35,43 @@
 
     <!-- View 1: Restaurant picker -->
     <div id="view-restaurants">
+        <!-- Hero — 3-layer pattern -->
         <div class="hero">
-            <h1>🍕 Jídlo z Pelhřimova až k tobě</h1>
-            <p>Vyber si restauraci, sestav objednávku a my ti ji přivezeme</p>
-            <div class="hero-stats">
-                <span>📍 Pelhřimov a okolí do 10 km</span>
-                <span class="hours-trigger" style="cursor:pointer" onclick="toggleHours()">🕐 Otevírací doba</span>
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Jídlo z&nbsp;Pelhřimova až&nbsp;k&nbsp;tobě</h1>
+                <p>Vyber si restauraci, sestav objednávku a&nbsp;my ti ji přivezeme</p>
+                <div class="hero-stats">
+                    <span>⏱ Do 45 minut</span>
+                    <span>🍽 6 restaurací</span>
+                    <span>📍 Pelhřimov</span>
+                </div>
+                <a href="#restaurants-section" class="hero-cta">Objednat jídlo</a>
+                <span class="hero-hours-link" onclick="toggleHours()">🕐 Otevírací doba</span>
             </div>
         </div>
-        <div id="restaurants-grid" class="restaurants-grid">
-            <div class="loading"><div class="spinner"></div>Načítám restaurace…</div>
+
+        <!-- Trust signals strip -->
+        <div class="trust-strip">
+            <span>⏱ Do 45 minut</span>
+            <span>🍽 6 restaurací</span>
+            <span>💳 Hotově i&nbsp;kartou</span>
+            <span>📍 Pelhřimov + 10 km</span>
+        </div>
+
+        <div id="restaurants-section">
+            <h2 class="section-title">Odkud si dáte?</h2>
+            <div id="restaurants-grid" class="restaurants-grid">
+                <div class="loading"><div class="spinner"></div>Načítám restaurace…</div>
+            </div>
         </div>
     </div>
 
     <!-- View 2: Menu -->
     <div id="view-menu" class="hidden">
         <button class="back-btn" onclick="showRestaurants()">← Zpět na restaurace</button>
-        <div class="menu-header">
-            <h2 id="menu-title"></h2>
-            <div id="menu-tags" class="restaurant-tags"></div>
-        </div>
+        <div id="menu-banner-container"></div>
         <div id="category-tabs" class="category-tabs"></div>
         <div id="menu-items"></div>
     </div>
@@ -150,6 +167,7 @@
             <button class="cart-clear" onclick="clearCart()">Vysypat</button>
         </div>
         <div class="cart-restaurant" id="cart-restaurant"></div>
+        <div id="free-delivery-banner"></div>
         <div id="cart-items"></div>
         <div id="cart-summary" class="cart-summary"></div>
         <button class="checkout-btn" id="cart-checkout-btn" onclick="goToCheckout()">
@@ -176,16 +194,35 @@
 <!-- Toast -->
 <div id="toast" class="toast"></div>
 
-<!-- Footer -->
+<!-- Footer — 3-column dark -->
 <footer class="footer">
-    <div class="footer-links">
-        <a href="tel:+420773020348">📞 773 020 348</a>
-        <a href="https://www.instagram.com/rozvozpejr/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.facebook.com/groups/768759486242247" target="_blank" rel="noopener">Facebook</a>
+    <div class="footer-inner">
+        <div class="footer-col">
+            <div class="footer-logo">
+                <div class="logo-icon">🛵</div>
+                <div class="logo-text">ROZVOZ <span style="color:var(--primary)">PEJR</span></div>
+            </div>
+            <p>Rozvoz jídla z&nbsp;oblíbených restaurací v&nbsp;Pelhřimově a&nbsp;okolí do&nbsp;10&nbsp;km. Objednávky telefonicky nebo online.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Kontakt</h4>
+            <a href="tel:+420773020348">📞 773 020 348</a>
+            <a href="https://www.instagram.com/rozvozpejr/" target="_blank" rel="noopener">📸 Instagram</a>
+            <a href="https://www.facebook.com/groups/768759486242247" target="_blank" rel="noopener">👍 Facebook</a>
+        </div>
+        <div class="footer-col">
+            <h4>Informace</h4>
+            <p>🕐 Po–So: 10–15, 17–20+</p>
+            <p>🕐 Ne: 17–20</p>
+            <p>📍 Pelhřimov + okolí 10 km</p>
+            <p>🚚 Dovoz od 49 Kč</p>
+        </div>
     </div>
-    <p>© 2026 Rozvoz Pejr — Pelhřimov a okolí</p>
+    <div class="footer-bottom">
+        © 2026 Rozvoz Pejr — Pelhřimov a okolí
+    </div>
 </footer>
 
-<script src="js/app.js?v=1"></script>
+<script src="js/app.js?v=2"></script>
 </body>
 </html>

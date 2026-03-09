@@ -4,7 +4,7 @@
     {
       "name": "Tortilla",
       "items": [
-        { "name": "Tortilla Klasik", "description": "Maso, zelenina, dresink", "price": 135, "available": true },
+        { "name": "Tortilla Klasik", "description": "Maso, zelenina, dresink", "price": 135, "available": true, "popular": true },
         { "name": "Tortilla Vegetarian", "description": "Falafel, zelenina, dresink", "price": 135, "available": true },
         { "name": "Tortilla se sýrem", "description": "Maso, sýr, zelenina, dresink", "price": 155, "available": true },
         { "name": "Tortilla jen maso", "description": "Dvojitá porce masa, dresink", "price": 180, "available": true }
@@ -33,7 +33,7 @@
     {
       "name": "French Tacos & Quesadilla",
       "items": [
-        { "name": "French Tacos Klasik", "description": "Maso, sýr, hranolky v tortille", "price": 195, "available": true },
+        { "name": "French Tacos Klasik", "description": "Maso, sýr, hranolky v tortille", "price": 195, "available": true, "popular": true },
         { "name": "French Tacos Vegetarian", "description": "Falafel, sýr, hranolky v tortille", "price": 195, "available": true },
         { "name": "Quesadilla Klasik", "description": "Tortilla s masem a sýrem", "price": 195, "available": true },
         { "name": "Quesadilla Vegetarian", "description": "Tortilla se zeleninou a sýrem", "price": 195, "available": true }

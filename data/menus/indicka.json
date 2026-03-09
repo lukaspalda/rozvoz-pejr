@@ -12,8 +12,8 @@
     {
       "name": "Kuřecí curry",
       "items": [
-        { "name": "Butter Chicken", "description": "Kuřecí v krémové rajčatové omáčce s máslem", "price": 195, "available": true },
-        { "name": "Chicken Tikka Masala", "description": "Kuřecí tikka v kořeněné masala omáčce", "price": 195, "available": true },
+        { "name": "Butter Chicken", "description": "Kuřecí v krémové rajčatové omáčce s máslem", "price": 195, "available": true, "popular": true },
+        { "name": "Chicken Tikka Masala", "description": "Kuřecí tikka v kořeněné masala omáčce", "price": 195, "available": true, "popular": true },
         { "name": "Chicken Korma", "description": "Kuřecí v jemné jogurtovo-mandlové omáčce", "price": 195, "available": true },
         { "name": "Chicken Vindaloo", "description": "Kuřecí ve velmi pálivé omáčce", "price": 195, "available": true },
         { "name": "Chicken Madras", "description": "Kuřecí v pikantní kokosové omáčce", "price": 195, "available": true }

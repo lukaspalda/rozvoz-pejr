@@ -4,7 +4,7 @@
     {
       "name": "Burritos",
       "items": [
-        { "name": "Burrito Pollo", "description": "Kuřecí, rýže, fazole, sýr, salsa, zakysaná smetana", "price": 185, "available": true },
+        { "name": "Burrito Pollo", "description": "Kuřecí, rýže, fazole, sýr, salsa, zakysaná smetana", "price": 185, "available": true, "popular": true },
         { "name": "Burrito Carne", "description": "Hovězí, rýže, fazole, sýr, salsa, zakysaná smetana", "price": 195, "available": true },
         { "name": "Burrito Veggie", "description": "Grilovaná zelenina, rýže, fazole, guacamole", "price": 175, "available": true }
       ]
@@ -28,7 +28,7 @@
     {
       "name": "Nachos",
       "items": [
-        { "name": "Nachos Grande", "description": "Tortilla chipsy, cheddar, jalapeño, salsa, guacamole, zakysaná smetana", "price": 175, "available": true },
+        { "name": "Nachos Grande", "description": "Tortilla chipsy, cheddar, jalapeño, salsa, guacamole, zakysaná smetana", "price": 175, "available": true, "popular": true },
         { "name": "Nachos s kuřecím", "description": "Nachos s kuřecím masem a sýrem", "price": 195, "available": true }
       ]
     },

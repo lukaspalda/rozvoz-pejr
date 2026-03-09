@@ -4,7 +4,7 @@
     {
       "name": "Pizza klasická (32 cm)",
       "items": [
-        { "name": "Margherita", "description": "Rajčatový základ, mozzarella, bazalka", "price": 145, "available": true },
+        { "name": "Margherita", "description": "Rajčatový základ, mozzarella, bazalka", "price": 145, "available": true, "popular": true },
         { "name": "Prosciutto", "description": "Rajčata, mozzarella, šunka", "price": 165, "available": true },
         { "name": "Funghi", "description": "Rajčata, mozzarella, žampiony", "price": 155, "available": true },
         { "name": "Salame", "description": "Rajčata, mozzarella, salám", "price": 165, "available": true },
@@ -13,7 +13,7 @@
         { "name": "Tonno", "description": "Rajčata, mozzarella, tuňák, cibule", "price": 175, "available": true },
         { "name": "Diavola", "description": "Rajčata, mozzarella, pikantní salám, chilli", "price": 170, "available": true },
         { "name": "Capricciosa", "description": "Rajčata, mozzarella, šunka, žampiony, olivy", "price": 175, "available": true },
-        { "name": "Stella Speciál", "description": "Rajčata, mozzarella, kuřecí, slanina, cibule, BBQ", "price": 195, "available": true }
+        { "name": "Stella Speciál", "description": "Rajčata, mozzarella, kuřecí, slanina, cibule, BBQ", "price": 195, "available": true, "popular": true }
       ]
     },
     {

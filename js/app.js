@@ -5,14 +5,6 @@
 const API = '/api';
 const CART_KEY = 'pejr-cart';
 const CART_EXPIRY = 2 * 60 * 60 * 1000; // 2 hours
-const RESTAURANT_EMOJIS = {
-    'gabl': '🍔',
-    'king-kebab': '🥙',
-    'gelato-pizza': '🍕',
-    'indicka': '🍛',
-    'tres-amigos': '🌮',
-    'hodovna': '🍖'
-};
 
 // Business hours
 const HOURS = {
@@ -102,7 +94,6 @@ async function loadRestaurants() {
         renderRestaurants();
     } catch (err) {
         console.error('Failed to load restaurants:', err);
-        // Fallback: load from static file
         try {
             const res = await fetch('/data/restaurants.json');
             restaurants = (await res.json()).filter(r => r.active).sort((a, b) => a.sortOrder - b.sortOrder);
@@ -120,17 +111,72 @@ function renderRestaurants() {
         return;
     }
 
-    grid.innerHTML = restaurants.map(r => `
+    grid.innerHTML = restaurants.map(r => {
+        const imgSrc = `img/restaurants/${r.image}`;
+        const tagsHtml = (r.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+        const addressHtml = r.address ? `<div class="restaurant-card-address">📍 ${r.address}</div>` : '';
+        const navigateHtml = r.mapUrl ? `<a href="${r.mapUrl}" class="restaurant-navigate" target="_blank" rel="noopener" onclick="event.stopPropagation()">🗺 Navigovat</a>` : '';
+
+        return `
         <div class="restaurant-card" onclick="showMenu('${r.id}')">
-            <div class="restaurant-emoji">${RESTAURANT_EMOJIS[r.id] || '🍽️'}</div>
-            <h3>${r.name}</h3>
-            <p>${r.description}</p>
-            <div class="restaurant-meta">
-                <span>🚚 ${r.deliveryFee} Kč dovoz</span>
-                <span>📦 min. ${r.minOrder} Kč</span>
+            <div class="restaurant-card-img">
+                <img src="${imgSrc}" alt="${r.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-emoji\\'>${getRestaurantEmoji(r.tags)}</div>'">
             </div>
-        </div>
-    `).join('');
+            <div class="restaurant-card-body">
+                <div class="restaurant-card-tags">${tagsHtml}</div>
+                <h3>${r.name}</h3>
+                <div class="restaurant-card-desc">${r.description}</div>
+                ${addressHtml}
+                <div class="restaurant-card-footer">
+                    <div class="restaurant-meta">
+                        <span>🚚 ${r.deliveryFee} Kč</span>
+                        <span>📦 min. ${r.minOrder} Kč</span>
+                    </div>
+                    ${navigateHtml}
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Animate cards entrance with IntersectionObserver
+    observeCards();
+}
+
+// Get a relevant emoji from restaurant tags (fallback for missing photos)
+function getRestaurantEmoji(tags) {
+    if (!tags) return '🍽️';
+    const tagStr = tags.join(' ');
+    if (tagStr.includes('pizza') || tagStr.includes('italská')) return '🍕';
+    if (tagStr.includes('kebab') || tagStr.includes('turecká')) return '🥙';
+    if (tagStr.includes('mexická') || tagStr.includes('burrito')) return '🌮';
+    if (tagStr.includes('indická') || tagStr.includes('curry')) return '🍛';
+    if (tagStr.includes('gril') || tagStr.includes('klasika')) return '🍖';
+    if (tagStr.includes('bistro') || tagStr.includes('česká')) return '🍔';
+    return '🍽️';
+}
+
+// IntersectionObserver for card entrance animation
+function observeCards() {
+    const cards = document.querySelectorAll('.restaurant-card');
+    if (!('IntersectionObserver' in window)) {
+        // Fallback: show all immediately
+        cards.forEach(c => c.classList.add('visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Stagger animation delay
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
 }
 
 // ── Menu ──
@@ -138,9 +184,8 @@ window.showMenu = async function(restaurantId) {
     currentRestaurant = restaurants.find(r => r.id === restaurantId);
     if (!currentRestaurant) return;
 
-    document.getElementById('menu-title').textContent = currentRestaurant.name;
-    document.getElementById('menu-tags').innerHTML = (currentRestaurant.tags || [])
-        .map(t => `<span class="tag">${t}</span>`).join('');
+    // Render menu banner (photo header)
+    renderMenuBanner();
 
     document.getElementById('menu-items').innerHTML = '<div class="loading"><div class="spinner"></div>Načítám menu…</div>';
     document.getElementById('category-tabs').innerHTML = '';
@@ -164,12 +209,50 @@ window.showMenu = async function(restaurantId) {
     renderMenuItems();
 };
 
+function renderMenuBanner() {
+    const container = document.getElementById('menu-banner-container');
+    const r = currentRestaurant;
+    const imgSrc = `img/restaurants/${r.image}`;
+    const tagsHtml = (r.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+    const addressHtml = r.address ? `<div class="menu-banner-address">📍 ${r.address}</div>` : '';
+
+    container.innerHTML = `
+        <div class="menu-banner">
+            <div class="menu-banner-bg" style="background-image:url('${imgSrc}')"></div>
+            <div class="menu-banner-overlay"></div>
+            <div class="menu-banner-content">
+                <div class="restaurant-tags">${tagsHtml}</div>
+                <h2>${r.name}</h2>
+                ${addressHtml}
+            </div>
+        </div>
+    `;
+}
+
 function renderCategoryTabs() {
     if (!currentMenu || !currentMenu.categories) return;
     const tabs = document.getElementById('category-tabs');
-    tabs.innerHTML = currentMenu.categories.map((cat, i) =>
-        `<div class="category-tab${i === 0 ? ' active' : ''}" onclick="scrollToCategory(${i})" data-cat="${i}">${cat.name}</div>`
+
+    // Collect popular items across all categories
+    const popularItems = [];
+    currentMenu.categories.forEach(cat => {
+        cat.items.forEach(item => {
+            if (item.popular) popularItems.push(item);
+        });
+    });
+
+    let tabsHtml = '';
+
+    // Add "Oblíbené" tab if there are popular items
+    if (popularItems.length > 0) {
+        tabsHtml += `<div class="category-tab active" onclick="scrollToCategory('popular')" data-cat="popular">🔥 Oblíbené</div>`;
+    }
+
+    tabsHtml += currentMenu.categories.map((cat, i) =>
+        `<div class="category-tab${popularItems.length === 0 && i === 0 ? ' active' : ''}" onclick="scrollToCategory(${i})" data-cat="${i}">${cat.name}</div>`
     ).join('');
+
+    tabs.innerHTML = tabsHtml;
 }
 
 window.scrollToCategory = function(index) {
@@ -180,26 +263,52 @@ window.scrollToCategory = function(index) {
     if (cat) cat.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
+function renderMenuItem(item) {
+    const popularBadge = item.popular ? `<span class="popular-badge">Oblíbené</span>` : '';
+    return `
+        <div class="menu-item ${item.available === false ? 'menu-item-unavailable' : ''}">
+            <div class="menu-item-info">
+                <div class="menu-item-name">${item.name}${popularBadge}</div>
+                ${item.description ? `<div class="menu-item-desc">${item.description}</div>` : ''}
+            </div>
+            <div class="menu-item-actions">
+                <span class="menu-item-price">${item.price} Kč</span>
+                ${item.available !== false ? `<button class="add-btn" onclick="addToCart('${escapeHtml(item.name)}', ${item.price})" title="Přidat do košíku">+</button>` : ''}
+            </div>
+        </div>
+    `;
+}
+
 function renderMenuItems() {
     if (!currentMenu || !currentMenu.categories) return;
     const container = document.getElementById('menu-items');
-    container.innerHTML = currentMenu.categories.map((cat, ci) => `
+
+    let html = '';
+
+    // Render "Oblíbené" section first if there are popular items
+    const popularItems = [];
+    currentMenu.categories.forEach(cat => {
+        cat.items.forEach(item => {
+            if (item.popular) popularItems.push(item);
+        });
+    });
+
+    if (popularItems.length > 0) {
+        html += `<div class="menu-category" id="cat-popular">
+            <h3>🔥 Oblíbené</h3>
+            ${popularItems.map(item => renderMenuItem(item)).join('')}
+        </div>`;
+    }
+
+    // Render regular categories
+    html += currentMenu.categories.map((cat, ci) => `
         <div class="menu-category" id="cat-${ci}">
             <h3>${cat.name}</h3>
-            ${cat.items.map(item => `
-                <div class="menu-item ${item.available === false ? 'menu-item-unavailable' : ''}">
-                    <div class="menu-item-info">
-                        <div class="menu-item-name">${item.name}</div>
-                        ${item.description ? `<div class="menu-item-desc">${item.description}</div>` : ''}
-                    </div>
-                    <div class="menu-item-actions">
-                        <span class="menu-item-price">${item.price} Kč</span>
-                        ${item.available !== false ? `<button class="add-btn" onclick="addToCart('${escapeHtml(item.name)}', ${item.price})" title="Přidat do košíku">+</button>` : ''}
-                    </div>
-                </div>
-            `).join('')}
+            ${cat.items.map(item => renderMenuItem(item)).join('')}
         </div>
     `).join('');
+
+    container.innerHTML = html;
 }
 
 // ── Cart ──
@@ -208,7 +317,6 @@ function loadCart() {
         const stored = localStorage.getItem(CART_KEY);
         if (!stored) return { items: [], restaurantId: null, restaurantName: null, updatedAt: 0 };
         const data = JSON.parse(stored);
-        // Check expiry
         if (Date.now() - data.updatedAt > CART_EXPIRY) {
             localStorage.removeItem(CART_KEY);
             return { items: [], restaurantId: null, restaurantName: null, updatedAt: 0 };
@@ -225,7 +333,6 @@ function saveCart() {
 }
 
 window.addToCart = function(name, price) {
-    // Check if switching restaurant
     if (cart.restaurantId && cart.restaurantId !== currentRestaurant.id && cart.items.length > 0) {
         if (!confirm(`V košíku máte položky z ${cart.restaurantName}. Chcete je nahradit?`)) {
             return;
@@ -282,8 +389,24 @@ function renderCartPanel() {
     const restaurant = restaurants.find(r => r.id === cart.restaurantId);
     const deliveryFee = restaurant?.deliveryFee || 49;
     const minOrder = restaurant?.minOrder || 0;
+    const freeThreshold = restaurant?.freeDeliveryThreshold || 0;
 
     document.getElementById('cart-restaurant').textContent = '🏪 ' + (cart.restaurantName || '');
+
+    const subtotal = cart.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+    // Free delivery upsell banner
+    const bannerEl = document.getElementById('free-delivery-banner');
+    if (freeThreshold > 0 && subtotal > 0) {
+        if (subtotal >= freeThreshold) {
+            bannerEl.innerHTML = `<div class="free-delivery-banner achieved">🎉 Máte dopravu zdarma!</div>`;
+        } else {
+            const remaining = freeThreshold - subtotal;
+            bannerEl.innerHTML = `<div class="free-delivery-banner upsell">🚚 Přidejte ještě ${remaining} Kč pro dopravu zdarma</div>`;
+        }
+    } else {
+        bannerEl.innerHTML = '';
+    }
 
     const itemsHtml = cart.items.map((item, i) => `
         <div class="cart-item">
@@ -302,12 +425,18 @@ function renderCartPanel() {
 
     document.getElementById('cart-items').innerHTML = itemsHtml;
 
-    const subtotal = cart.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const total = subtotal + deliveryFee;
+    // Calculate delivery: free if above threshold
+    const isFreeDelivery = freeThreshold > 0 && subtotal >= freeThreshold;
+    const actualDeliveryFee = isFreeDelivery ? 0 : deliveryFee;
+    const total = subtotal + actualDeliveryFee;
+
+    const deliveryLabel = isFreeDelivery
+        ? `<span class="free-delivery-label">ZDARMA</span>`
+        : `${deliveryFee} Kč`;
 
     let summaryHtml = `
         <div class="cart-summary-row"><span>Mezisoučet</span><span>${subtotal} Kč</span></div>
-        <div class="cart-summary-row"><span>Dovoz</span><span>${deliveryFee} Kč</span></div>
+        <div class="cart-summary-row"><span>Dovoz</span><span>${deliveryLabel}</span></div>
         <div class="cart-summary-row total"><span>Celkem</span><span>${total} Kč</span></div>
     `;
 
@@ -355,8 +484,11 @@ window.goToCheckout = function() {
 function renderCheckout() {
     const restaurant = restaurants.find(r => r.id === cart.restaurantId);
     const deliveryFee = restaurant?.deliveryFee || 49;
+    const freeThreshold = restaurant?.freeDeliveryThreshold || 0;
     const subtotal = cart.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const total = subtotal + deliveryFee;
+    const isFreeDelivery = freeThreshold > 0 && subtotal >= freeThreshold;
+    const actualDeliveryFee = isFreeDelivery ? 0 : deliveryFee;
+    const total = subtotal + actualDeliveryFee;
 
     let html = `<h3>🏪 ${cart.restaurantName}</h3>`;
     cart.items.forEach(item => {
@@ -365,8 +497,10 @@ function renderCheckout() {
             <span>${item.price * item.quantity} Kč</span>
         </div>`;
     });
+
+    const deliveryLabel = isFreeDelivery ? '<span class="free-delivery-label">ZDARMA</span>' : `${actualDeliveryFee} Kč`;
     html += `<div class="checkout-item" style="border-top:1px solid var(--cream-dark);padding-top:8px;margin-top:4px">
-        <span>Dovoz</span><span>${deliveryFee} Kč</span>
+        <span>Dovoz</span><span>${deliveryLabel}</span>
     </div>`;
     html += `<div class="checkout-item" style="font-weight:700;font-size:1rem">
         <span>Celkem</span><span>${total} Kč</span>
@@ -419,16 +553,13 @@ window.submitOrder = async function(e) {
             throw new Error(data.error || 'Chyba při odesílání objednávky');
         }
 
-        // Success!
         document.getElementById('confirm-order-id').textContent = data.orderId;
         showView('view-confirmation');
 
-        // Clear cart
         cart = { items: [], restaurantId: null, restaurantName: null, updatedAt: 0 };
         saveCart();
         updateCartUI();
 
-        // Reset form
         document.getElementById('checkout-form').reset();
 
     } catch (err) {

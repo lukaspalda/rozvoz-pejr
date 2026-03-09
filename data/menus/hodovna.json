@@ -11,7 +11,7 @@
     {
       "name": "Hlavní jídla",
       "items": [
-        { "name": "Svíčková na smetaně", "description": "Hovězí svíčková, houskový knedlík, brusinka, šlehačka", "price": 195, "available": true },
+        { "name": "Svíčková na smetaně", "description": "Hovězí svíčková, houskový knedlík, brusinka, šlehačka", "price": 195, "available": true, "popular": true },
         { "name": "Vepřo-knedlo-zelo", "description": "Pečené vepřové, houskový knedlík, dušené zelí", "price": 185, "available": true },
         { "name": "Smažený řízek", "description": "Vepřový řízek, bramborový salát", "price": 185, "available": true },
         { "name": "Kuřecí steak", "description": "Grilovaný kuřecí steak s bylinkovým máslem, hranolky", "price": 195, "available": true },
@@ -22,7 +22,7 @@
     {
       "name": "Grilované speciality",
       "items": [
-        { "name": "Žebírka v medu", "description": "Vepřová žebírka glazovaná medem, pečivo", "price": 245, "available": true },
+        { "name": "Žebírka v medu", "description": "Vepřová žebírka glazovaná medem, pečivo", "price": 245, "available": true, "popular": true },
         { "name": "Grilovaná kolena", "description": "Pečené vepřové koleno s křenem a hořčicí", "price": 265, "available": true },
         { "name": "Mix gril", "description": "Kuřecí, vepřové, klobása, zelenina, hranolky", "price": 285, "available": true }
       ]
